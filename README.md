@@ -1,34 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Ticket System
 
-## Getting Started
+- Create a ticket system to handle freelance work
+- Should link up and use Supabase as the backend
+- Users would be able to add a ticket, update their ticket based on a log-in code, remove their own ticket
+- Ticket system would allow users to check tickets as "done"
+- Work similar to a todo list but with tickets or todos created by other users submitting a form
 
-First, run the development server:
+- Admin panel to handle tickets
+- Potentially create an app to read this, notify the admin user by email?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- NextJS
+- Shadcn/ui
+- React
+- Supabase
+- Tailwind
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Database Design
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Ticket
+    - Contact name
+    - Contact email
+    - Ticket number
+    - Ticket type
+    - Ticket details
+        - How one can help?
 
-## Learn More
+- Contact User
+    - Code to access and update their ticket
 
-To learn more about Next.js, take a look at the following resources:
+- Costs (simply to look up costs of types)
+    - name
+    - cost
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Ticket Types
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Tutoring/Teaching
+- Web Development
+- Mobile Development
+- Consulting
