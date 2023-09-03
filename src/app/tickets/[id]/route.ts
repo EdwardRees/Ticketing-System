@@ -1,27 +1,22 @@
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
-import type { Database } from "@/lib/database.types";
+import { NextRequest } from "next/server";
 
-import { NextRequest, NextResponse } from "next/server";
-
-const get_ticket = async (req: NextRequest, id: string) => {
-  const supabase = createRouteHandlerClient<Database>({ cookies });
-  const { data, error } = await supabase
-    .from("tickets")
-    .select("*")
-    .eq("id", id)
-    .single();
-
-  if (error) {
-    return NextResponse.error();
-  }
-
-  return NextResponse.json(data);
-};
+import { get_ticket, update_ticket, delete_ticket } from "../util/ticket";
 
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
   return get_ticket(req, params.id);
+}
+
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  let data = await req.json();
+  return update_ticket(req, data, params.id);
+}
+
+export async function DELETE(req:NextRequest, {params}: {params: {id: string}}){
+  return delete_ticket(req, params.id)
 }
