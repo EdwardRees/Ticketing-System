@@ -3,10 +3,25 @@ import { cookies } from "next/headers";
 
 import type { Database } from "@/lib/database.types";
 
-export default function Home() {
+import { Navbar } from "@/components/";
+import { Dashboard } from "@/components/dashboard";
+
+export default async function Home() {
   const supabase = createServerComponentClient<Database>({ cookies });
-  
-  return <></>;
+  const { data: auth, error: auth_error } = await supabase.auth.getSession();
+  const { data: user, error: user_error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("user_id", auth?.session?.user.id)
+    .single();
+  const { data: tickets, error: ticket_error } = await supabase.from("tickets").select("*").order("created_at", { ascending: false });
+
+  return (
+    <>
+      <Navbar />
+      <Dashboard />
+    </>
+  );
 }
 
 /*

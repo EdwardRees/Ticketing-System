@@ -20,23 +20,46 @@
 ## Database Design
 
 - Ticket
-    - Contact name
-    - Contact email
-    - Ticket number
-    - Ticket type
-    - Ticket details
-        - How one can help?
+    - id: string
+    - title: string
+    - description: string
+    - type: string (TicketType)
+    - status: string (TicketStatus)
+    - contact_name: string
+    - contact_email: string
+    - contact_phone: string
+    - createdAt: string
+    - assigned_to: string
+    - due_date: Date
+- User
+    - id: string
+    - name: string
+    - email: string
+- Group?
+- Todo
+    - id: string
+    - title: string
+    - description: string
+    - completed: boolean
+    - createdAt: string
+    - due_date: Date
 
-- Contact User
-    - Code to access and update their ticket
+### Types
 
-- Costs (simply to look up costs of types)
-    - name
-    - cost
-
-## Ticket Types
-
-- Tutoring/Teaching
-- Web Development
-- Mobile Development
-- Consulting
+- TicketType
+    - Tutoring/Teaching
+    - Web Development
+    - Mobile Development
+    - Consulting
+- TicketStatus
+    - Open
+    - In Progress
+    - Closed
+    - Overdue
+    - Cancelled
+    - On Hold
+    - Resolved
+    - Reopened
+    - Waiting for Customer
+    - Waiting for Third Party
+    - Waiting for Change
