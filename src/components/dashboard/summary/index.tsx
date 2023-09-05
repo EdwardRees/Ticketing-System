@@ -9,25 +9,24 @@ const DashboardSummary = async () => {
   const { data: overdue, error: overdue_error } = await supabase
     .from("tickets")
     .select("*")
-    .eq("status", "overdue");
+    .eq("status", "Overdue");
 
   const { data: open, error: open_error } = await supabase
     .from("tickets")
     .select("*")
-    .eq("status", "open");
+    .eq("status", "Open");
 
   const { data: closed, error: closed_error } = await supabase
     .from("tickets")
     .select("*")
-    .eq("status", "closed");
+    .eq("status", "Closed");
 
   const { data: on_hold, error: on_hold_error } = await supabase
     .from("tickets")
     .select("*")
-    .eq("status", "on_hold");
+    .eq("status", "On Hold");
 
-  const { data: unassigned, error: unassigned_error } = await supabase.from("tickets").select("*").eq("assigned_to", null);
-
+  const { data: unassigned, error: unassigned_error } = await supabase.from("tickets").select().eq("assigned_to", null);
 
   return <>
     <div className="flex flex-row items-center justify-center py-5 px-5">

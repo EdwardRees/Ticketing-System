@@ -11,11 +11,12 @@
 
 ## Tech Stack
 
-- NextJS
-- Shadcn/ui
-- React
-- Supabase
-- Tailwind
+- [NextJS](https://www.nextjs.org)
+- [Shadcn/ui](https://ui.shadcn.com/)
+- [React](https://react.dev/)
+- [Supabase](https://supabase.com/)
+- [Tailwind](https://tailwindcss.com/)
+- [Resend](https://resend.com/)
 
 ## Database Design
 
@@ -35,7 +36,7 @@
     - id: string
     - name: string
     - email: string
-- Group?
+- Team?
 - Todo
     - id: string
     - title: string
