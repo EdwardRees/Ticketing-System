@@ -1,7 +1,7 @@
+import { Todos } from "../todos/dashboard-view";
 import { DashboardSummary } from "./summary";
-import { Todos } from "./todos";
-import { Button } from '@/components/ui';
-import { TicketForm } from "./ticket-form";
+
+import { TicketForm } from "../tickets/ticket-form";
 const Dashboard = async () => {
   return (
     <>
@@ -22,5 +22,3 @@ const Dashboard = async () => {
 export { Dashboard };
 
 export * from "./summary";
-export * from './todos';
-export * from './ticket-form';

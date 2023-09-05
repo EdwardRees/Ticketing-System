@@ -48,7 +48,7 @@ const TodoForm = ({ user_id }: { user_id: string }) => {
     <>
       <Sheet open={showSheet} onOpenChange={() => setShowSheet(!showSheet)}>
         <SheetTrigger>
-          <Button className="w-full">Create Todo</Button>
+          <Button variant="secondary">Create Todo</Button>
         </SheetTrigger>
         <SheetContent>
           <form onSubmit={handleSubmit}>

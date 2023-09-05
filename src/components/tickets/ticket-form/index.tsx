@@ -20,7 +20,7 @@ import axios from "axios";
 const Field = ({ name, value, onChange, isTextArea }: any) => {
   if (isTextArea) {
     return (
-      <div className="flex flex-row items-center justify-between py-3 px-3">
+      <div className="flex flex-row items-center justify-between py-3 px-3 w-full">
         <Label htmlFor={name} className="pr-3">
           {name}
         </Label>
@@ -34,7 +34,7 @@ const Field = ({ name, value, onChange, isTextArea }: any) => {
     );
   }
   return (
-    <div className="flex flex-row items-center justify-between py-3 px-3">
+    <div className="flex flex-row items-center justify-between py-3 px-3 w-full">
       <Label htmlFor={name} className="pr-3">
         {name}
       </Label>

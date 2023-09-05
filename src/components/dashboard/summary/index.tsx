@@ -26,7 +26,7 @@ const DashboardSummary = async () => {
     .select("*")
     .eq("status", "On Hold");
 
-  const { data: unassigned, error: unassigned_error } = await supabase.from("tickets").select().eq("assigned_to", null);
+  const { data: unassigned, error: unassigned_error } = await supabase.from("tickets").select().is("assigned_to", null);
 
   return <>
     <div className="flex flex-row items-center justify-center py-5 px-5">
