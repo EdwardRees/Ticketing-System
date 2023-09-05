@@ -3,6 +3,8 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { TodoForm } from "./components/TodoForm";
+import { Button } from "@/components/ui";
+import Link from "next/link";
 
 const Todo = ({ todo }: { todo: any }) => {
   return (
@@ -28,7 +30,12 @@ const Todos = async () => {
     <>
       <div className="flex flex-row justify-between items-center">
         <p className="text-xl">Todos</p>
-        <TodoForm user_id={auth?.session?.user.id} />
+        <div>
+          <TodoForm user_id={auth?.session?.user.id} />
+          <Link href="/todos">
+            <Button variant="link">View All</Button>
+          </Link>
+        </div>
       </div>
       {todos?.length === undefined || todos?.length === 0 ? (
         <p>You have 0 todos. </p>

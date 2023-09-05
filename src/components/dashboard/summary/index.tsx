@@ -1,7 +1,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import type { Database } from "@/lib/database.types";
-import { Box } from './components/Box';
+import { Box } from "./components/Box";
 
 const DashboardSummary = async () => {
   const supabase = createServerComponentClient<Database>({ cookies });
@@ -26,18 +26,37 @@ const DashboardSummary = async () => {
     .select("*")
     .eq("status", "On Hold");
 
-  const { data: unassigned, error: unassigned_error } = await supabase.from("tickets").select().is("assigned_to", null);
+  const { data: unassigned, error: unassigned_error } = await supabase
+    .from("tickets")
+    .select("*")
+    .is("assigned_to", null);
 
-  return <>
-    <div className="flex flex-row items-center justify-center py-5 px-5">
-      <Box name="Overdue" value={overdue?.length !== undefined ? overdue?.length : 0} />
-      <Box name="Open" value={open?.length !== undefined ? open?.length : 0} />
-      <Box name="Closed" value={closed?.length !== undefined ? closed?.length : 0} />
-      <Box name="On Hold" value={on_hold?.length !== undefined ? on_hold?.length : 0} />
-      <Box name="Unassigned" value={unassigned?.length !== undefined ? unassigned?.length : 0} />
-      
-    </div>
-  </>
+  return (
+    <>
+      <div className="flex flex-row items-center justify-center py-5 px-5">
+        <Box
+          name="Overdue"
+          value={overdue?.length !== undefined ? overdue?.length : 0}
+        />
+        <Box
+          name="Open"
+          value={open?.length !== undefined ? open?.length : 0}
+        />
+        <Box
+          name="Closed"
+          value={closed?.length !== undefined ? closed?.length : 0}
+        />
+        <Box
+          name="On Hold"
+          value={on_hold?.length !== undefined ? on_hold?.length : 0}
+        />
+        <Box
+          name="Unassigned"
+          value={unassigned?.length !== undefined ? unassigned?.length : 0}
+        />
+      </div>
+    </>
+  );
 };
 
 export { DashboardSummary };
