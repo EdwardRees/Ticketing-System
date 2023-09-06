@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui";
+import Link from "next/link";
 import { Todos } from "../todos/dashboard-view";
 import { DashboardSummary } from "./summary";
 
@@ -9,7 +11,12 @@ const Dashboard = async () => {
         <div>
           <div className="flex flex-row justify-between">
             <p className="text-xl">Ticket Summary</p>
-            <TicketForm />
+            <div>
+              <TicketForm />
+              {/* <Link href="/dashboard">
+                <Button variant="link">To Dashboard</Button>
+              </Link> */}
+            </div>
           </div>
           <DashboardSummary />
           <Todos />

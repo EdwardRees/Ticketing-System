@@ -40,7 +40,7 @@ const Navbar = async () => {
       </div>
       <div className="flex flex-row items-center"></div>
       <div className="flex flex-row items-center">
-        <Button className="mr-3">Dashboard</Button>
+        <Link href="/dashboard"><Button className="mr-3">Dashboard</Button></Link>
 
         <Link href="/profile">
           <Button className="mr-3" variant="ghost">
