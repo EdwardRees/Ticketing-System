@@ -16,6 +16,7 @@ import {
 } from "@/components/ui";
 import { TicketType, TicketStatus } from "@/lib/types";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Field = ({ name, value, onChange, isTextArea }: any) => {
   if (isTextArea) {
@@ -62,6 +63,8 @@ const TicketForm = () => {
 
   const [showSheet, setShowSheet] = useState<boolean>(false);
 
+  const router = useRouter();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -85,6 +88,7 @@ const TicketForm = () => {
         setContactName("");
         setContactEmail("");
         setContactPhone("");
+        router.refresh();
       } else {
         setError("Failed to create ticket");
       }

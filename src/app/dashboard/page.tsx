@@ -8,6 +8,8 @@ import { Navbar } from "@/components";
 import { TicketForm } from "@/components/tickets";
 import { DashboardSummary } from "@/components/dashboard";
 
+import { OpenTickets } from "./sections";
+
 const DashboardPage = async () => {
   const supabase = createServerComponentClient<Database>({ cookies });
   const { data: auth, error: auth_error } = await supabase.auth.getSession();
@@ -24,6 +26,7 @@ const DashboardPage = async () => {
           <TicketForm />
         </div>
         <DashboardSummary />
+        <OpenTickets />
       </div>
     </>
   );

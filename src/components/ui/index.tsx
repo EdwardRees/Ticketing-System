@@ -7,3 +7,4 @@ export * from './label';
 export * from './textarea';
 export * from './sheet';
 export * from './select';
+export * from './accordion';

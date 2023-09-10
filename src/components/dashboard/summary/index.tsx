@@ -9,7 +9,17 @@ const DashboardSummary = async () => {
   const { data: overdue, error: overdue_error } = await supabase
     .from("tickets")
     .select("*")
-    .eq("status", "Overdue");
+    .not("due_date", "is", null);
+
+  let overdue_tickets = [];
+
+  if (overdue?.length !== undefined && overdue?.length > 0) {
+    const today = new Date();
+    overdue_tickets = overdue?.filter((ticket) => {
+      const due_date = new Date(ticket.due_date);
+      return due_date < today;
+    });
+  }
 
   const { data: open, error: open_error } = await supabase
     .from("tickets")
@@ -36,7 +46,8 @@ const DashboardSummary = async () => {
       <div className="flex flex-row items-center justify-center py-5 px-5">
         <Box
           name="Overdue"
-          value={overdue?.length !== undefined ? overdue?.length : 0}
+          value={overdue_tickets.length}
+          edge="left"
         />
         <Box
           name="Open"
@@ -53,6 +64,7 @@ const DashboardSummary = async () => {
         <Box
           name="Unassigned"
           value={unassigned?.length !== undefined ? unassigned?.length : 0}
+          edge="right"
         />
       </div>
     </>
