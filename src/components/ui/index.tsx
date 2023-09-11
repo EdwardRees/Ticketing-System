@@ -8,3 +8,4 @@ export * from './textarea';
 export * from './sheet';
 export * from './select';
 export * from './accordion';
+export * from './table';

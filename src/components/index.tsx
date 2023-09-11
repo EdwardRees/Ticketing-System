@@ -6,3 +6,4 @@ export * from './icon';
 export * from './dashboard';
 export * from './tickets';
 export * from './todos';
+export * from './data-table';

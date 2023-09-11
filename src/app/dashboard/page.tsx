@@ -5,10 +5,11 @@ import type { Database } from "@/lib/database.types";
 import { redirect } from "next/navigation";
 
 import { Navbar } from "@/components";
-import { TicketForm } from "@/components/tickets";
+import { TicketForm, Tickets } from "@/components/tickets";
 import { DashboardSummary } from "@/components/dashboard";
 
 import { OpenTickets } from "./sections";
+
 
 const DashboardPage = async () => {
   const supabase = createServerComponentClient<Database>({ cookies });
@@ -26,7 +27,9 @@ const DashboardPage = async () => {
           <TicketForm />
         </div>
         <DashboardSummary />
-        <OpenTickets />
+        <Tickets />
+        {/* <OpenTickets /> */}
+        
       </div>
     </>
   );
