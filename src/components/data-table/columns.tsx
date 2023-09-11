@@ -52,10 +52,12 @@ export const columns: ColumnDef<Ticket>[] = [
   {
     accessorKey: "status",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />
+    // TODO Add a button to change the status
   },
   {
     accessorKey: "type",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Type" />
+    // TODO Add a button to change the type
   },
   {
     accessorKey: "contact_name",
@@ -80,7 +82,7 @@ export const columns: ColumnDef<Ticket>[] = [
   {
     accessorKey: "assigned_to",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Assigned To" />
-  },
+  }, // TODO: Add a button to assign the ticket to a user
   {
     accessorKey: "due_date",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Due Date" />,
@@ -89,7 +91,7 @@ export const columns: ColumnDef<Ticket>[] = [
       if (due_date === null || due_date === undefined) {
         return "No Due Date";
       }
-
+// TODO Add a button to change the due date
       return new Date(due_date as string).toLocaleDateString();
     },
   },
