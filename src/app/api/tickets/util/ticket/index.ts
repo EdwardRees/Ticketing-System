@@ -3,3 +3,7 @@ export * from './update_ticket';
 export * from './delete_ticket';
 export * from './change_assignee_ticket';
 export * from './change_ticket_status';
+export * from './unassign_ticket';
+export * from './change_date';
+export * from './reset_date';
+export * from './change_type';

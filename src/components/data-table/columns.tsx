@@ -12,11 +12,27 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/";
+import { AssignedToCell } from "./assigned_to_cell";
+import { DueDateCell } from "./due_date_cell";
+import { TypeCell } from "./type_cell";
+
+import axios from "axios";
 
 import { DataTableColumnHeader } from "./data-table-column";
 
-import { MoreHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { MoreHorizontal } from "lucide-react";
+
+const change_status = async (ticket_id: string, status: string) => {
+  const response = await axios.patch(
+    `${location.origin}/api/tickets/${ticket_id}/change_status`,
+    {
+      status,
+    }
+  );
+  location.reload();
+  return response;
+};
 
 export const columns: ColumnDef<Ticket>[] = [
   {
@@ -89,34 +105,47 @@ export const columns: ColumnDef<Ticket>[] = [
             <DropdownMenuLabel>Change Status</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <span className="flex items-center">
+              <Button
+                className="flex items-center"
+                onClick={() => change_status(row.getValue("id"), "Open")}
+              >
                 <span className="h-2 w-2 bg-green-400 rounded-full mr-2" />
                 Open
-              </span>
+              </Button>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <span className="flex items-center">
+              <Button
+                className="flex items-center"
+                onClick={() => change_status(row.getValue("id"), "On Hold")}
+              >
                 <span className="h-2 w-2 bg-yellow-400 rounded-full mr-2" />
                 On Hold
-              </span>
+              </Button>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <span className="flex items-center">
+              <Button
+                className="flex items-center"
+                onClick={() => change_status(row.getValue("id"), "Closed")}
+              >
                 <span className="h-2 w-2 bg-red-400 rounded-full mr-2" />
                 Closed
-              </span>
+              </Button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
     },
-    // TODO Add a button to change the status
   },
   {
     accessorKey: "type",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Type" />
     ),
+    cell: ({ row }) => {
+      const type = row.getValue("type");
+
+      return <TypeCell ticket_id={row.getValue("id")} type={type} />;
+    },
     // TODO Add a button to change the type
   },
   {
@@ -152,19 +181,25 @@ export const columns: ColumnDef<Ticket>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Assigned To" />
     ),
-  }, // TODO: Add a button to assign the ticket to a user
+    cell: ({ row }) => {
+      const assigned_to = row.getValue("assigned_to");
+      return (
+        <AssignedToCell
+          assigned_to={assigned_to}
+          ticket_id={row.getValue("id")}
+        />
+      );
+    },
+  },
   {
     accessorKey: "due_date",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Due Date" />
     ),
     cell: ({ row }) => {
-      let due_date = row.getValue("due_date");
-      if (due_date === null || due_date === undefined) {
-        return "No Due Date";
-      }
-      // TODO Add a button to change the due date
-      return new Date(due_date as string).toLocaleDateString();
+      const due_date = row.getValue("due_date");
+      const ticket_id = row.getValue("id");
+      return <DueDateCell due_date={due_date} ticket_id={ticket_id} />;
     },
   },
   {

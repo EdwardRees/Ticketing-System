@@ -4,3 +4,5 @@ export * from './user';
 
 export * from './ticket-status';
 export * from './todo';
+
+export * from './state_types';

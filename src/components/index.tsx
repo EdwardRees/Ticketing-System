@@ -7,3 +7,4 @@ export * from './dashboard';
 export * from './tickets';
 export * from './todos';
 export * from './data-table';
+export * from './date-picker';
