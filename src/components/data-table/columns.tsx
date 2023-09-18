@@ -11,10 +11,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
 } from "@/components/ui/";
-import { AssignedToCell } from "./assigned_to_cell";
-import { DueDateCell } from "./due_date_cell";
-import { TypeCell } from "./type_cell";
+import { AssignedToCell, DueDateCell, TypeCell } from "./cells/";
+import { Ticket as TicketDetails } from "./details";
 
 import axios from "axios";
 
@@ -146,7 +149,6 @@ export const columns: ColumnDef<Ticket>[] = [
 
       return <TypeCell ticket_id={row.getValue("id")} type={type} />;
     },
-    // TODO Add a button to change the type
   },
   {
     accessorKey: "contact_name",
@@ -223,7 +225,23 @@ export const columns: ColumnDef<Ticket>[] = [
               Copy Ticket ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View Ticket details</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Dialog>
+                <DialogTrigger>
+                  {/* <Button variant="ghost" size="sm"> */}
+                  View Ticket details
+                  {/* </Button> */}
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <h2 className="text-lg font-medium text-gray-900">
+                      Ticket Details
+                    </h2>
+                  </DialogHeader>
+                  <TicketDetails ticket={ticket} />
+                </DialogContent>
+              </Dialog>
+            </DropdownMenuItem>
             <DropdownMenuItem>View Assigned To details</DropdownMenuItem>
             <DropdownMenuItem>Edit Ticket Details</DropdownMenuItem>
           </DropdownMenuContent>
