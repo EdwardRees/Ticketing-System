@@ -1,13 +1,29 @@
 "use client";
+import { useState, useEffect } from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogFooter,
+  Button,
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetFooter
 } from "@/components/ui/";
 import { Ticket as TicketType } from "@/lib/types/ticket";
 import { cn } from "@/lib/utils";
-const Ticket = ({ ticket }: { ticket: TicketType }) => {
+const Ticket = ({
+  ticket,
+  triggerComponent,
+}: {
+  ticket: TicketType;
+  triggerComponent: React.ReactNode;
+}) => {
   const {
     id,
     title,
@@ -20,7 +36,7 @@ const Ticket = ({ ticket }: { ticket: TicketType }) => {
     due_date,
   } = ticket;
 
-  const user = ticket.assigned_to;
+  const [open, setOpen] = useState<boolean>(false);
 
   const compare_due_date = () => {
     const colors = [
@@ -53,61 +69,66 @@ const Ticket = ({ ticket }: { ticket: TicketType }) => {
     }
   };
   return (
-    <div
-      className={cn(
-        "px-4 py-4 flex flex-col border-2 border-solid rounded-md mx-2",
-        due_date !== null ? `${compare_due_date()}` : "border-gray-500"
-      )}
-      key={id}
-    >
-      <div className="flex flex-row justify-between py-3 w-64">
-        <p className="text-xl font-semibold">{title}</p>
-        <p className="text-lg">{status}</p>
-      </div>
-      <p className="text-sm w-full py-2">{description}</p>
-      <p className="text-lg">[{type}]</p>
-      <br />
-      <div className="px-3 py-3 border border-solid rounded-xl">
-        <Accordion type="single" collapsible className="pb-2">
-          <AccordionItem value="Contact Information">
-            <AccordionTrigger>
-              <p className="text-lg font-semibold">Contact Information</p>
-            </AccordionTrigger>
-            <AccordionContent>
-              <p className="text-sm">{contact_name}</p>
-              <p className="text-sm">{contact_email}</p>
-              <p className="text-sm">{contact_phone}</p>
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="Assigned To">
-            <AccordionTrigger>
-              <p className="text-lg font-semibold">Assigned To</p>
-            </AccordionTrigger>
-            <AccordionContent>
-              <p className="text-sm">
-                {/* {user} */}
-                {/* {user !== null ? user : "Unassigned"} */}
-                {ticket.assigned_to !== null
-                  ? ticket.assigned_to
-                  : "Unassigned"}
-              </p>
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="Due Date">
-            <AccordionTrigger>
-              <p className="text-lg font-semibold">Due Date</p>
-            </AccordionTrigger>
-            <AccordionContent>
-              <p className="text-sm">
-                {due_date !== null
-                  ? new Date(due_date).toLocaleDateString()
-                  : "No Due Date"}
-              </p>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </div>
-    </div>
+    <Sheet open={open} onOpenChange={(open) => setOpen(open)} key={id}>
+      <SheetTrigger asChild>{triggerComponent}</SheetTrigger>
+      <SheetContent>
+        <div
+          className={cn(
+            "px-4 py-4 flex flex-col border-2 border-solid rounded-md mx-2",
+            due_date !== null ? `${compare_due_date()}` : "border-gray-500"
+          )}
+        >
+          <div className="flex flex-row justify-between py-3 w-64">
+            <p className="text-xl font-semibold">{title}</p>
+            <p className="text-lg">{status}</p>
+          </div>
+          <p className="text-sm w-full py-2">{description}</p>
+          <p className="text-lg">[{type}]</p>
+          <br />
+          <div className="px-3 py-3 border border-solid rounded-xl">
+            <Accordion type="single" collapsible className="pb-2">
+              <AccordionItem value="Contact Information">
+                <AccordionTrigger>
+                  <p className="text-lg font-semibold">Contact Information</p>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <p className="text-sm">{contact_name}</p>
+                  <p className="text-sm">{contact_email}</p>
+                  <p className="text-sm">{contact_phone}</p>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="Assigned To">
+                <AccordionTrigger>
+                  <p className="text-lg font-semibold">Assigned To</p>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <p className="text-sm">
+                    {ticket.assigned_to !== null
+                      ? ticket.assigned_to
+                      : "Unassigned"}
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="Due Date">
+                <AccordionTrigger>
+                  <p className="text-lg font-semibold">Due Date</p>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <p className="text-sm">
+                    {due_date !== null
+                      ? new Date(due_date).toLocaleDateString()
+                      : "No Due Date"}
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+        </div>
+        <SheetFooter>
+          <Button variant="ghost">Close</Button>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   );
 };
 

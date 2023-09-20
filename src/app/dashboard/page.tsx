@@ -8,8 +8,6 @@ import { Navbar } from "@/components";
 import { TicketForm, Tickets } from "@/components/tickets";
 import { DashboardSummary } from "@/components/dashboard";
 
-import { OpenTickets } from "./sections";
-
 
 const DashboardPage = async () => {
   const supabase = createServerComponentClient<Database>({ cookies });

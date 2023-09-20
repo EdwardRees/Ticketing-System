@@ -42,7 +42,8 @@ function DataTable<TData, TValue>({
   const getUsers = useUserStore((state: any) => state.getUsers);
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [getUsers]);
+  
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});

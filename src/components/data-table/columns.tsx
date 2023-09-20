@@ -10,11 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
+  DropdownMenuTrigger
 } from "@/components/ui/";
 import { AssignedToCell, DueDateCell, TypeCell } from "./cells/";
 import { Ticket as TicketDetails } from "./details";
@@ -226,21 +222,10 @@ export const columns: ColumnDef<Ticket>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Dialog>
-                <DialogTrigger>
-                  {/* <Button variant="ghost" size="sm"> */}
-                  View Ticket details
-                  {/* </Button> */}
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <h2 className="text-lg font-medium text-gray-900">
-                      Ticket Details
-                    </h2>
-                  </DialogHeader>
-                  <TicketDetails ticket={ticket} />
-                </DialogContent>
-              </Dialog>
+              <TicketDetails
+                ticket={ticket}
+                triggerComponent={<span>View Ticket Details</span>}
+              />
             </DropdownMenuItem>
             <DropdownMenuItem>View Assigned To details</DropdownMenuItem>
             <DropdownMenuItem>Edit Ticket Details</DropdownMenuItem>
